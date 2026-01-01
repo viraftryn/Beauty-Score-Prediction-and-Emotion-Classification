@@ -477,18 +477,55 @@ with col2:
                     col_a, col_b, col_c = st.columns(3)
                     
                     with col_a:
+                        col_label, col_help = st.columns([4, 1])
+                        with col_label:
+                            st.markdown("**Single-Task Model**")
+                        with col_help:
+                            st.markdown("""
+                                <style>
+                                .help-icon {
+                                cursor: help;
+                                display: inline-block;
+                                }
+                                </style>
+                            """, unsafe_allow_html=True)
+                            with st.popover("ℹ️"):
+                                st.markdown("""
+                                    **Single-Task Learning**
+                                    This model focuses **only** on predicting beauty scores.
+                                    It was trained exclusively on facial attractiveness ratings,
+                                    learning features specifically optimized for beauty assessment.
+                                """)
                         st.metric(
-                            "Single-Task Model",  
-                            f"{results['beauty']:.2f}/5.0",
-                            help="This model focuses ONLY on predicting beauty scores. It's a specialist trained exclusively on facial attractiveness ratings."
+                            "",  
+                            f"{results['beauty']:.2f}/5.0"
                         )
                         st.progress(results['mtl_beauty'] / 5.0)
                     
                     with col_b:
+                        col_label, col_help = st.columns([4, 1])
+                        with col_label:
+                            st.markdown("**Multi-Task Model**")
+                        with col_help:
+                            st.markdown("""
+                                <style>
+                                .help-icon {
+                                cursor: help;
+                                display: inline-block;
+                                }
+                                </style>
+                            """, unsafe_allow_html=True)
+                            with st.popover("ℹ️"):
+                                st.markdown("""
+                                    **Multi-Task Learning**
+                                    This model learns **two tasks simultaneously**: predicting beauty scores 
+                                    AND recognizing emotions. 
+                                    By learning both tasks together, the model gains additional insights from facial expressions, 
+                                    which can help understand attractiveness better.
+                                """)
                         st.metric(
-                            "Multi-Task Model",
-                            f"{results['mtl_beauty']:.2f}/5.0",
-                            help="This model learns TWO tasks simultaneously: beauty scores AND emotion recognition. By learning both together, it gains broader facial understanding that can improve predictions."
+                            "",
+                            f"{results['mtl_beauty']:.2f}/5.0"
                         )
                         st.progress(results['mtl_beauty'] / 5.0)
                     
